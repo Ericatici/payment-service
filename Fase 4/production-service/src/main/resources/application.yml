@@ -1,0 +1,36 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: production-service
+  datasource:
+    url: jdbc:mysql://${database-host:production-db}/${database-name:production_db}${database-extra-params:?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: ${database-user:root}
+    password: ${database-password:rootpassword}
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+# Configuração dos clientes REST para outros microserviços
+customer:
+  service:
+    url: ${customer-service-url:http://localhost:8081}
+
+order:
+  service:
+    url: ${order-service-url:http://localhost:8083}
+
+payment:
+  service:
+    url: ${payment-service-url:http://localhost:8084}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+

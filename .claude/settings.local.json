@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(dir:*)",
+      "Bash(xargs:*)",
+      "Bash(mkdir:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh run view:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfeat: add CI/CD pipeline with all test fixes\n\n- Add GitHub Actions workflow for CI/CD\n- Configure H2 in-memory database for tests\n- Add SonarCloud integration with 70% coverage requirement\n- Fix Cucumber configuration: add @AutoConfigureMockMvc to CucumberSpringConfiguration\n- Remove duplicate Spring annotations from CustomerStepDefinitions\n- Add H2 dependency and SonarQube Maven plugin\n- Configure test profile with H2 database\n\nThis should make all tests pass in the CI environment.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git commit:*)",
+      "Bash(gh pr create:*)"
+    ]
+  }
+}

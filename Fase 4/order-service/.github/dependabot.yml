@@ -1,0 +1,20 @@
+version: 2
+updates:
+  # Atualiza dependências do Maven (Spring Boot, JPA, Cucumber, etc.)
+  - package-ecosystem: "maven"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+
+  # Atualiza as configurações do Dev Container
+  - package-ecosystem: "devcontainers"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # Atualiza GitHub Actions (se você usar CI/CD)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"

@@ -1,0 +1,23 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: order-service
+  data:
+    mongodb:
+      uri: mongodb://${database-user}:${database-password}@${database-host:mongodb}:${database-port:27017}/${database-name:order_db}?authSource=${database-auth:order_db}
+
+
+production:
+  service:
+    url: ${production-service-url:http://localhost:8082}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+
+

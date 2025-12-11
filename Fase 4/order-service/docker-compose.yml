@@ -1,0 +1,46 @@
+networks:
+  na-comanda-net:
+    driver: bridge
+
+services:
+  mongodb:
+    image: mongo:7.0
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGODB_DATABASE}
+    networks:
+      - na-comanda-net
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    networks:
+      - na-comanda-net
+    ports:
+      - "8083:8083"
+    depends_on:
+      - mongodb
+    environment:
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_AUTH=${DATABASE_AUTH}
+      - PRODUCTION_SERVICE_URL=${PRODUCTION_SERVICE_URL}
+      - MERCADOPAGO_CLIENT_ID=${MERCADOPAGO_CLIENT_ID}
+      - MERCADOPAGO_SECRET_ID=${MERCADOPAGO_SECRET_ID}
+
+volumes:
+  mongodb-data:
+
+

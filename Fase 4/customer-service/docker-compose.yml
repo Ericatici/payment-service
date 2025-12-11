@@ -1,0 +1,43 @@
+networks:
+  na-comanda-net:
+    driver: bridge
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=customer_db
+      - MYSQL_USER=customer_user
+      - MYSQL_PASSWORD=customer_password
+    networks:
+      - na-comanda-net
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    networks:
+      - na-comanda-net
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_NAME=customer_db
+      - DATABASE_HOST=db
+      - DATABASE_USER=customer_user
+      - DATABASE_PASSWORD=customer_password
+      - SERVER_PORT=8081
+      - SPRING_PROFILES_ACTIVE=docker
+      - LOGGING_LEVEL_COM_LANCHONETE=INFO
+      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK=WARN
+
+volumes:
+  db-data:
