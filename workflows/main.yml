@@ -1,0 +1,32 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - master
+      - main
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: na.comanda
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Dar permissão ao mvnw
+        run: chmod +x mvnw
+
+      - name: Build com Maven Wrapper
+        run: ./mvnw clean install -DskipTests
+
+      - name: Rodar testes
+        run: ./mvnw test

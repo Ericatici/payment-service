@@ -1,0 +1,31 @@
+networks:
+  na-comanda-net:
+    driver: bridge
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    networks:
+      - na-comanda-net
+    ports:
+      - "8084:8084"
+    environment:
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - MERCADOPAGO_CLIENT_ID=${MERCADOPAGO_CLIENT_ID}
+      - MERCADOPAGO_SECRET_ID=${MERCADOPAGO_SECRET_ID}
+      - MERCADOPAGO_BASE_URL=${MERCADOPAGO_BASE_URL}
+      - MERCADOPAGO_EXTERNAL_POS_ID=${MERCADOPAGO_EXTERNAL_POS_ID}
+      - MERCADOPAGO_URL=${MERCADOPAGO_URL}
+      - MERCADOPAGO_ORDERS_PATH=${MERCADOPAGO_ORDERS_PATH}
+      - PRODUCTION_SERVICE_URL=${PRODUCTION_SERVICE_URL}
+
+volumes:
+  db-data:
+
+

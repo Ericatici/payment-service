@@ -1,0 +1,28 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: payment-service
+
+# Configuração do cliente REST para o Production Service
+production:
+  service:
+    url: ${production-service-url:http://localhost:8082}
+
+# Configurações do MercadoPago
+mercadopago:
+  baseUrl: ${mercadopago-base-url:https://api.mercadopago.com}
+  externalPosId: ${mercadopago-external-pos-id:nacomanda2025}
+  path:
+    auth: ${mercadopago-url:/oauth/token}
+    orders: ${mercadopago-orders-path:/v1/orders}
+  access:
+    client: ${mercadopago-client-id}
+    secret: ${mercadopago-secret-id}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
