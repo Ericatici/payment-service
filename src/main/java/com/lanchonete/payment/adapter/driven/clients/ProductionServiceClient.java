@@ -3,6 +3,7 @@ package com.lanchonete.payment.adapter.driven.clients;
 import com.lanchonete.payment.core.application.dto.OrderDTO;
 import com.lanchonete.payment.core.domain.model.PaymentConfirmation;
 import com.lanchonete.payment.core.domain.repositories.OrderRepository;
+import com.lanchonete.payment.core.domain.repositories.OrderRepository.Order;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
